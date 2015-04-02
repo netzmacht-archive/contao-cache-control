@@ -96,17 +96,7 @@ class PageCache
             ->limit(1)
             ->execute($pageId, $cacheKey);
 
-        if ($result->numRows > 0) {
-            $result->first();
-            // Entry already exists, update the cache time
-
-            $this->database
-                ->prepare(Query::UPDATE_PAGE_CACHE_ENTRY)
-                ->set(array('tstamp' => time()))
-                ->execute($result->id);
-        } else {
-            // Create new entry
-
+        if ($result->numRows < 1) {
             $this->database
                 ->prepare(Query::CREATE_PAGE_CACHE_ENTRY)
                 ->set(
