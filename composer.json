@@ -1,0 +1,39 @@
+{
+    "name":"netzmacht/contao-cache-control",
+    "description": "Clear the Contao page cache for single files.",
+    "keywords":["contao", "page", "cache"],
+    "type":"contao-module",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"David Molineus",
+            "email":"mail@netzmacht.de",
+            "homepage":"http://www.netzmacht.de",
+            "role":"Developer"
+        }
+    ],
+    "support":{
+        "email":"mail@netzmacht.de",
+        "issues":"https://github.com/netzmacht/contao-cache-control/issues",
+        "source":"https://github.com/netzmacht/contao-cache-control"
+    },
+    "require":{
+        "php":">=5.3",
+        "contao/core":">=3.2,<3.5-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Netzmacht\\Contao\\CacheControl\\": "src/"
+        }
+    },
+    "extra":{
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        },
+        "contao": {
+            "sources":{
+                "module": "system/modules/cache-control"
+            }
+        }
+    }
+}
