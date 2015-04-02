@@ -20,7 +20,6 @@ use Input;
  */
 class Hooks extends Base
 {
-
     /**
      * Initialize the getCacheKey hook.
      *

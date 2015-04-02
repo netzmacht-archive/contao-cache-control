@@ -11,7 +11,11 @@
 
 namespace Netzmacht\Contao\CacheControl;
 
-
+/**
+ * Database queries.
+ *
+ * @package Netzmacht\Contao\CacheControl
+ */
 class Query
 {
     const CREATE_PAGE_CACHE_ENTRY = 'INSERT INTO tl_page_cache %s';
@@ -28,6 +32,13 @@ class Query
 
     const REMOVE_ALL_ENTRIES = 'TRUNCATE TABLE tl_page_cache';
 
+    /**
+     * Create remove entries query.
+     *
+     * @param array $entries The entries id.
+     *
+     * @return string
+     */
     public static function removeEntries($entries)
     {
         return sprintf(

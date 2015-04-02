@@ -48,7 +48,19 @@ class DcaHelper extends Base
         }
     }
 
-    public function generateButton($row, $href, $label, $title, $icon, $attributes, $table)
+    /**
+     * Generate the clear cache button.
+     *
+     * @param array  $row        The data row.
+     * @param string $href       The link.
+     * @param string $label      The label.
+     * @param string $title      The title.
+     * @param string $icon       The icon.
+     * @param string $attributes The attributes.
+     *
+     * @return string
+     */
+    public function generateButton($row, $href, $label, $title, $icon, $attributes)
     {
         $count = $this->service->countPageCacheEntries($row['id']);
 
@@ -65,6 +77,13 @@ class DcaHelper extends Base
         );
     }
 
+    /**
+     * Generate the clear cache button for the select view.
+     *
+     * @param array $buttons The submit buttons.
+     *
+     * @return array
+     */
     public function generateClearCacheButton($buttons)
     {
         $buttons['clearCache'] = sprintf(
@@ -75,6 +94,13 @@ class DcaHelper extends Base
         return $buttons;
     }
 
+    /**
+     * Do the page cache clearing.
+     *
+     * @param int $pageId The page id.
+     *
+     * @return void
+     */
     private function doClearPageCache($pageId)
     {
         $result = $this->service->clearPage($pageId);
