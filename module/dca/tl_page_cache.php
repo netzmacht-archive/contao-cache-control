@@ -28,42 +28,6 @@ $GLOBALS['TL_DCA']['tl_page_cache'] = array
         ),
     ),
 
-    'list' => array
-    (
-        'sorting' => array
-        (
-            'mode'                    => 1,
-            'fields'                  => array('pid'),
-            'panelLayout'             => 'search,limit',
-            'flag'                    => 1,
-        ),
-        'label' => array
-        (
-            'fields'                  => array('pid', 'tstamp'),
-            'format'                  => '%s <span class="tl_gray">[%s]</span>'
-        ),
-        'global_operations' => array
-        (
-            'all' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
-                'href'                => 'act=select',
-                'class'               => 'header_edit_all',
-                'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
-            ),
-        ),
-        'operations' => array
-        (
-            'delete' => array
-            (
-                'label'               => &$GLOBALS['TL_LANG']['tl_leaflet_map']['delete'],
-                'href'                => 'act=delete',
-                'icon'                => 'delete.gif',
-                'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
-            ),
-        )
-    ),
-
     'fields' => array
     (
         'id'     => array
