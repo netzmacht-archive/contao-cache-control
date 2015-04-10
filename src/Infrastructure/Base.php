@@ -25,20 +25,26 @@ class Base
     /**
      * @var PageCache
      */
-    protected $service;
+    private $service;
 
     /**
-     * Construct.
+     * Get the page cache service.
+     *
+     * @return PageCache
      */
-    public function __construct()
+    public function service()
     {
-        // Create the Contao stack. Why isn't is part of system/initialize.php?
-        if (TL_MODE === 'FE') {
-            \FrontendUser::getInstance();
-        } else {
-            \BackendUser::getInstance();
+        if ($this->service === null) {
+            // Create the Contao stack. Why isn't is part of system/initialize.php?
+            if (TL_MODE === 'FE') {
+                \FrontendUser::getInstance();
+            } else {
+                \BackendUser::getInstance();
+            }
+
+            $this->service = new PageCache(Database::getInstance(), Files::getInstance());
         }
 
-        $this->service = new PageCache(Database::getInstance(), Files::getInstance());
+        return $this->service;
     }
 }

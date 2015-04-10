@@ -58,7 +58,7 @@ class Hooks extends Base
                 $preparedKey .= '.mobile';
             }
 
-            $this->service->registerCacheKey($objPage->id, md5($preparedKey));
+            $this->service()->registerCacheKey($objPage->id, md5($preparedKey));
         }
 
         return $cacheKey;
@@ -80,7 +80,7 @@ class Hooks extends Base
             $purge = (array) Input::post('purge');
 
             if (isset($purge['folders']) && in_array('pages', $purge['folders'])) {
-                $this->service->clearAll();
+                $this->service()->clearAll();
             }
         }
     }
@@ -94,6 +94,6 @@ class Hooks extends Base
      */
     public function clearCacheByCron()
     {
-        $this->service->clearAll();
+        $this->service()->clearAll();
     }
 }
