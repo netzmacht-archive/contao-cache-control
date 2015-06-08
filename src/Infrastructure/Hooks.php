@@ -55,7 +55,7 @@ class Hooks extends Base
                 if (\Input::cookie('TL_VIEW') == 'mobile'
                     || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop')
                 ) {
-                    // Mobile key is usually added after the hook. So add it here. See. contao/core#7828.
+                    // Mobile key is usually added after the hook. So add it here. See. contao/core#7826.
                     $preparedKey .= '.mobile';
 
                 } elseif (version_compare(VERSION, '3.5', '>=')) {
