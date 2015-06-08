@@ -51,11 +51,17 @@ class Hooks extends Base
         if ($objPage) {
             $preparedKey = $cacheKey;
 
-            // Mobile key is usually added after the hook. So add it here.
-            if (\Input::cookie('TL_VIEW') == 'mobile'
-                || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop')
-            ) {
-                $preparedKey .= '.mobile';
+            if ($objPage->mobileLayout > 0) {
+                if (\Input::cookie('TL_VIEW') == 'mobile'
+                    || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop')
+                ) {
+                    // Mobile key is usually added after the hook. So add it here. See. contao/core#7828.
+                    $preparedKey .= '.mobile';
+
+                } elseif (version_compare(VERSION, '3.5', '>=')) {
+                    // Contao 3.5 uses desktop suffix if mobile layout is enabled.
+                    $preparedKey .= '.desktop';
+                }
             }
 
             $this->service()->registerCacheKey($objPage->id, md5($preparedKey));
