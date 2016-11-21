@@ -35,7 +35,7 @@ If you want to install the extension manually, please do these steps:
  * Copy the `src` folder into `system/modules/cache-control/classes`.
  * Open `system/modules/cache-control/config/autoload.php` and uncomment the class loader lines.
 
-After installing it you have to update the database structure.
+After installing it you have to update the database structure and clear your page cache.
 
 
 Limitations
