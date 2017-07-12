@@ -8,7 +8,7 @@
         {
             "name":"David Molineus",
             "email":"mail@netzmacht.de",
-            "homepage":"http://www.netzmacht.de",
+            "homepage":"https://netzmacht.de",
             "role":"Developer"
         }
     ],
@@ -19,7 +19,11 @@
     },
     "require":{
         "php":">=5.3",
-        "contao/core":">=3.2,<4"
+        "contao/core-bundle": "~3.5 || ~4.4",
+        "contao-community-alliance/composer-plugin": "~2.0 || ~3.0"
+    },
+    "require-dev": {
+        "netzmacht/contao-build-tools": "~1.1"
     },
     "autoload": {
         "psr-4": {
