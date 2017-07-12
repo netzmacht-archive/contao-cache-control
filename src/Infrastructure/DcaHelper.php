@@ -3,7 +3,7 @@
 /**
  * @package    contao-cache-control
  * @author     David Molineus <david.molineus@netzmacht.de>
- * @copyright  2015 netzmacht creative David Molineus
+ * @copyright  2015-2017 netzmacht David Molineus
  * @license    LGPL 3.0
  * @filesource
  *
@@ -59,6 +59,8 @@ class DcaHelper extends Base
      * @param string $attributes The attributes.
      *
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function generateButton($row, $href, $label, $title, $icon, $attributes)
     {
@@ -83,6 +85,8 @@ class DcaHelper extends Base
      * @param array $buttons The submit buttons.
      *
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function generateClearCacheButton($buttons)
     {
@@ -100,6 +104,8 @@ class DcaHelper extends Base
      * @param int $pageId The page id.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     private function doClearPageCache($pageId)
     {

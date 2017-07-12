@@ -3,7 +3,7 @@
 /**
  * @package    dev
  * @author     David Molineus <david.molineus@netzmacht.de>
- * @copyright  2015 netzmacht creative David Molineus
+ * @copyright  2015-2017 netzmacht David Molineus
  * @license    LGPL 3.0
  * @filesource
  *
@@ -26,6 +26,8 @@ class Hooks extends Base
      * The callback is added by the initializeSystem hook so its hopefully the last callback being triggered.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function initialize()
     {
@@ -41,17 +43,16 @@ class Hooks extends Base
      * @param string $cacheKey The cache key.
      *
      * @return string
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function registerPageCacheKey($cacheKey)
     {
-        global $objPage;
-
         // $objPage is only available when the hook is triggered by the FrontendTemplate::addToCache method.
         // If it's triggered by outputFromCache it's not available. Make use of this knowledge.
-        if ($objPage) {
+        if ($GLOBALS['$objPage']) {
             $preparedKey = $cacheKey;
 
-            if ($objPage->mobileLayout > 0) {
+            if ($GLOBALS['$objPage']->mobileLayout > 0) {
                 if (\Input::cookie('TL_VIEW') == 'mobile'
                     || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop')
                 ) {
@@ -64,7 +65,7 @@ class Hooks extends Base
                 }
             }
 
-            $this->service()->registerCacheKey($objPage->id, md5($preparedKey));
+            $this->service()->registerCacheKey($GLOBALS['$objPage']->id, md5($preparedKey));
         }
 
         return $cacheKey;
@@ -73,7 +74,7 @@ class Hooks extends Base
     /**
      * Clear the database cache when being in the maintenance mode.
      *
-     * Triggered in by initializeSystem hook. Todo: Find a better place to trigger it.
+     * Triggered in by initializeSystem hook.
      *
      * @return void
      */
