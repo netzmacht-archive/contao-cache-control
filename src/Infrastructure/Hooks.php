@@ -49,10 +49,10 @@ class Hooks extends Base
     {
         // $objPage is only available when the hook is triggered by the FrontendTemplate::addToCache method.
         // If it's triggered by outputFromCache it's not available. Make use of this knowledge.
-        if ($GLOBALS['$objPage']) {
+        if ($GLOBALS['objPage']) {
             $preparedKey = $cacheKey;
 
-            if ($GLOBALS['$objPage']->mobileLayout > 0) {
+            if ($GLOBALS['objPage']->mobileLayout > 0) {
                 if (\Input::cookie('TL_VIEW') == 'mobile'
                     || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop')
                 ) {
@@ -65,7 +65,7 @@ class Hooks extends Base
                 }
             }
 
-            $this->service()->registerCacheKey($GLOBALS['$objPage']->id, md5($preparedKey));
+            $this->service()->registerCacheKey($GLOBALS['objPage']->id, md5($preparedKey));
         }
 
         return $cacheKey;
