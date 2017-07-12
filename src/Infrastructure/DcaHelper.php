@@ -64,10 +64,13 @@ class DcaHelper extends Base
      */
     public function generateButton($row, $href, $label, $title, $icon, $attributes)
     {
-        $count = $this->service()->countPageCacheEntries($row['id']);
+        $count         = $this->service()->countPageCacheEntries($row['id']);
+        $user          = \BackendUser::getInstance();
+        $hasPermission = $user->hasAccess($row['type'], 'alpty') && $user->isAllowed(\BackendUser::CAN_EDIT_PAGE, $row);
 
-        if (!$count) {
-            return \Image::getHtml($icon, $label, 'style="opacity:0.5;filter: gray;-webkit-filter: grayscale(100%);"');
+        if (!$count || !$hasPermission) {
+            $icon = \Image::getHtml($icon, $label, 'style="opacity:0.5;filter: gray;-webkit-filter: grayscale(100%);"');
+            return $icon . ' ';
         }
 
         return sprintf(
