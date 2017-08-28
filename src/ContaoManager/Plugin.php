@@ -16,6 +16,7 @@ use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use FOS\HttpCacheBundle\FOSHttpCacheBundle;
 use Netzmacht\Contao\CacheControl\NetzmachtContaoCacheControlBundle;
+use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 
 /**
  * Class Plugin
@@ -30,7 +31,8 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(FOSHttpCacheBundle::class),
+            BundleConfig::create(FOSHttpCacheBundle::class)
+                ->setLoadAfter([SensioFrameworkExtraBundle::class]),
             BundleConfig::create(NetzmachtContaoCacheControlBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class])
                 ->setLoadAfter([FOSHttpCacheBundle::class])
