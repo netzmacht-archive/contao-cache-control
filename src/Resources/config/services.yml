@@ -1,0 +1,10 @@
+services:
+  netzmacht.contao_cache_control.dca.page:
+    class: Netzmacht\Contao\CacheControl\Dca\PageDca
+    arguments:
+      - '@fos_http_cache.cache_manager'
+
+  netzmacht.contao_cache_control.listener.page_response_tagger:
+    class: Netzmacht\Contao\CacheControl\Listener\PageResponseTaggerListener
+    arguments:
+      - '@fos_http_cache.http.symfony_response_tagger'

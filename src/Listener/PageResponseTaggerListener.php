@@ -26,6 +26,16 @@ class PageResponseTaggerListener
     private $responseTagger;
 
     /**
+     * PageResponseTaggerListener constructor.
+     *
+     * @param ResponseTagger $responseTagger
+     */
+    public function __construct(ResponseTagger $responseTagger)
+    {
+        $this->responseTagger = $responseTagger;
+    }
+
+    /**
      * Add Tags to the
      * @param PageModel $pageModel
      */
