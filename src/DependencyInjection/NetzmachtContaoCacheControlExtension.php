@@ -32,6 +32,7 @@ class NetzmachtContaoCacheControlExtension extends Extension
             $container,
             new FileLocator(__DIR__ . '/../Resources/config')
         );
+
         $loader->load('services.yml');
     }
 }

@@ -18,7 +18,7 @@ use FOS\HttpCache\ResponseTagger;
  *
  * @package Netzmacht\Contao\CacheControl\Listener
  */
-class PageResponseTaggerListener
+class AddPageTagsListener
 {
     /**
      * @var ResponseTagger
@@ -30,7 +30,7 @@ class PageResponseTaggerListener
      *
      * @param ResponseTagger $responseTagger
      */
-    public function __construct(ResponseTagger $responseTagger)
+    public function __construct(ResponseTagger $responseTagger = null)
     {
         $this->responseTagger = $responseTagger;
     }
@@ -41,7 +41,7 @@ class PageResponseTaggerListener
      */
     public function onGeneratePage(PageModel $pageModel)
     {
-        if ($pageModel) {
+        if ($this->responseTagger) {
             $this->responseTagger->addTags(['page', 'page-' . $pageModel->id]);
         }
     }

@@ -14,10 +14,7 @@ namespace Netzmacht\Contao\CacheControl\Dca;
 use Contao\Input;
 use Contao\Message;
 use Controller;
-use Database;
-use Files;
 use FOS\HttpCacheBundle\CacheManager;
-use Netzmacht\Contao\CacheControl\Infrastructure\Base;
 
 /**
  * Helper class to trigger the page cache service within Contao.
@@ -38,7 +35,7 @@ class PageDca
      *
      * @param CacheManager $cacheManager Cache Manager.
      */
-    public function __construct(CacheManager $cacheManager)
+    public function __construct(CacheManager $cacheManager = null)
     {
         $this->cacheManager = $cacheManager;
     }
@@ -52,6 +49,10 @@ class PageDca
      */
     public function clearPageCache()
     {
+        if (!$this->cacheManager) {
+            return;
+        }
+
         if (Input::get('clearCache') === '1') {
             $this->doClearPageCache(Input::get('id'));
             Controller::redirect(Controller::getReferer());

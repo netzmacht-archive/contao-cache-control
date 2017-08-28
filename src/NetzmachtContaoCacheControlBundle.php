@@ -10,6 +10,8 @@
 
 namespace Netzmacht\Contao\CacheControl;
 
+use Netzmacht\Contao\CacheControl\DependencyInjection\ConfigureFosHttpCacheDependenciesCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -19,4 +21,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class NetzmachtContaoCacheControlBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new ConfigureFosHttpCacheDependenciesCompilerPass());
+    }
 }
