@@ -33,11 +33,6 @@
     "extra":{
         "branch-alias": {
             "dev-master": "1.0.x-dev"
-        },
-        "contao": {
-            "sources":{
-                "module": "system/modules/cache-control"
-            }
         }
     }
 }
