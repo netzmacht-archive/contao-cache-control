@@ -10,5 +10,4 @@
  */
 
 $GLOBALS['TL_LANG']['tl_page']['clearCache']      = array('Seitencache leeren', 'Seitencache leeren');
-$GLOBALS['TL_LANG']['tl_page']['clearCacheCount'] = ' (%s Dateien)';
 $GLOBALS['TL_LANG']['tl_page']['clearCacheReset'] = 'Seitencache für Seite ID "%s" wurde zurückgesetzt.';

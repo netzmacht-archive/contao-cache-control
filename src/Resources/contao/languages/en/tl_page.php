@@ -10,5 +10,4 @@
  */
 
 $GLOBALS['TL_LANG']['tl_page']['clearCache']      = array('Clear page cache', 'Clear page cache');
-$GLOBALS['TL_LANG']['tl_page']['clearCacheCount'] = ' (%s Cache files)';
 $GLOBALS['TL_LANG']['tl_page']['clearCacheReset'] = 'Page cache for page ID "%s" cleared.';

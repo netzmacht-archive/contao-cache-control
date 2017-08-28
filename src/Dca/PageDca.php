@@ -9,20 +9,40 @@
  *
  */
 
-namespace Netzmacht\Contao\CacheControl\Infrastructure;
+namespace Netzmacht\Contao\CacheControl\Dca;
 
+use Contao\Input;
+use Contao\Message;
 use Controller;
 use Database;
 use Files;
-use Input;
+use FOS\HttpCacheBundle\CacheManager;
+use Netzmacht\Contao\CacheControl\Infrastructure\Base;
 
 /**
  * Helper class to trigger the page cache service within Contao.
  *
  * @package Netzmacht\Contao\CacheControl
  */
-class DcaHelper extends Base
+class PageDca
 {
+    /**
+     * Cache Manager.
+     *
+     * @var CacheManager
+     */
+    private $cacheManager;
+
+    /**
+     * PageDca constructor.
+     *
+     * @param CacheManager $cacheManager Cache Manager.
+     */
+    public function __construct(CacheManager $cacheManager)
+    {
+        $this->cacheManager = $cacheManager;
+    }
+
     /**
      * Clear page cache for a defined page.
      *
@@ -40,8 +60,8 @@ class DcaHelper extends Base
         if (Input::get('act') === 'select' && Input::post('clearCache')) {
             $ids = (array) Input::post('IDS');
 
-            foreach ($ids as $id) {
-                $this->doClearPageCache($id);
+            foreach ($ids as $pageId) {
+                $this->doClearPageCache($pageId);
             }
 
             Controller::redirect(Controller::getReferer());
@@ -64,11 +84,10 @@ class DcaHelper extends Base
      */
     public function generateButton($row, $href, $label, $title, $icon, $attributes)
     {
-        $count         = $this->service()->countPageCacheEntries($row['id']);
         $user          = \BackendUser::getInstance();
         $hasPermission = $user->hasAccess($row['type'], 'alpty') && $user->isAllowed(\BackendUser::CAN_EDIT_PAGE, $row);
 
-        if (!$count || !$hasPermission) {
+        if (!$hasPermission) {
             $icon = \Image::getHtml($icon, $label, 'style="opacity:0.5;filter: gray;-webkit-filter: grayscale(100%);"');
             return $icon . ' ';
         }
@@ -76,7 +95,7 @@ class DcaHelper extends Base
         return sprintf(
             '<a href="%s" title="%s"%s>%s</a> ',
             \Backend::addToUrl($href . '&amp;id=' . $row['id']),
-            $title . sprintf($GLOBALS['TL_LANG']['tl_page']['clearCacheCount'], $count),
+            $title . sprintf($GLOBALS['TL_LANG']['tl_page']['clearCacheCount']),
             $attributes,
             \Image::getHtml($icon, $label)
         );
@@ -112,13 +131,11 @@ class DcaHelper extends Base
      */
     private function doClearPageCache($pageId)
     {
-        $result = $this->service()->clearPage($pageId);
+        $this->cacheManager->invalidateTags(['page-' . $pageId]);
 
-        if ($result) {
-            \Message::add(
-                sprintf($GLOBALS['TL_LANG']['tl_page']['clearCacheReset'], $pageId),
-                'TL_CONFIRM'
-            );
-        }
+        Message::add(
+            sprintf($GLOBALS['TL_LANG']['tl_page']['clearCacheReset'], $pageId),
+            'TL_CONFIRM'
+        );
     }
 }
